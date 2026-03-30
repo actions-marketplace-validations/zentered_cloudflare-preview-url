@@ -22,10 +22,13 @@ create a new token with the following permissions:
 
 Copy the token and add it to your repository secrets as `CLOUDFLARE_API_TOKEN`.
 
-### Global API Key
+### Global API Key (legacy)
 
-[Copy your "Global API Key"](https://dash.cloudflare.com/profile/api-tokens) -
-this also requires the Account Email to be set.
+If you cannot use an API Token, you can authenticate with a
+[Global API Key](https://dash.cloudflare.com/profile/api-tokens). Set your
+Global API Key as `CLOUDFLARE_API_TOKEN` and also add `CLOUDFLARE_ACCOUNT_EMAIL`
+with your Cloudflare account email. Do **not** mix these — if you're using an
+API Token, leave `CLOUDFLARE_ACCOUNT_EMAIL` unset.
 
 ### Workflow template
 
@@ -76,11 +79,15 @@ add the following secrets:
 
 ### Optional Secrets
 
-- **`CLOUDFLARE_ACCOUNT_EMAIL`** - Your Cloudflare account email address
+- **`CLOUDFLARE_ACCOUNT_EMAIL`** - Your Cloudflare account email address (only
+  for Global API Key authentication)
 
-**Note:** When providing `CLOUDFLARE_ACCOUNT_EMAIL`, the action will use API Key
-authentication instead of Bearer token authentication. This is required if
-you're using a Global API Key instead of an API Token.
+> **⚠️ Important:** Only set `CLOUDFLARE_ACCOUNT_EMAIL` if you are using a
+> **Global API Key**. When this variable is present, the action switches from
+> Bearer token authentication to API Key authentication. If you set
+> `CLOUDFLARE_ACCOUNT_EMAIL` while using an **API Token**, authentication will
+> fail. If you're using the recommended API Token approach, do **not** set
+> `CLOUDFLARE_ACCOUNT_EMAIL`.
 
 ## Inputs
 
